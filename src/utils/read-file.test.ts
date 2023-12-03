@@ -5,3 +5,4 @@ describe("Day 1 - Part 1", () => {
     await readFile("./test.txt")
   });
 });
+

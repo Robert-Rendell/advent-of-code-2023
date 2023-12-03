@@ -1,13 +1,13 @@
 import { findCalibrationValue, part1, sumAllCalibrationValues } from "./pt1";
 
 describe("Day 1 - Part 1", () => {
-  it("should answer the example correctly", () => {
+  it("should answer the example correctly", async () => {
     const input = `1abc2
 pqr3stu8vwx
 a1b2c3d4e5f
 treb7uchet`;
 
-    const output = part1({ input });
+    const output = await part1({ input });
 
     expect(output).toBe(142);
   });
