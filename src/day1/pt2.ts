@@ -22,7 +22,6 @@ export function findCalibrationValue(line: string) {
   const results = line.match(
     /\d{1}|one|two|three|four|five|six|seven|eight|nine/g,
   );
-  console.log(results);
   if (results) {
     let v = 0;
     let first = results[0];
@@ -36,7 +35,6 @@ export function findCalibrationValue(line: string) {
       last = "" + lastFound;
     }
     v = parseInt(first + last);
-    console.log(v);
     return v;
   }
   return 0;
