@@ -12,7 +12,6 @@ export function findCalibrationValue(line: string) {
     }
     let v = 0;
     v = parseInt(results[0] + results[results.length - 1]);
-    console.log(v);
     return v;
   }
   return 0;
