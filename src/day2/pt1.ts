@@ -11,7 +11,7 @@ export type Game = {
 export async function part1(opts?: { input: string }) {
   let input: string = "";
   if (!opts?.input) {
-    input = await readFile("src/day1/puzzles/p1.puzzle.txt");
+    input = await readFile("src/day2/d2.puzzle.txt");
   }
 
   const games = gamesParser(input);
