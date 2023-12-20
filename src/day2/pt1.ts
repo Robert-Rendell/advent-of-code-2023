@@ -8,19 +8,39 @@ export type Game = {
   reveals: GameReveal[];
 };
 
-export async function part1(opts?: { input: string }) {
+export async function part1(
+  opts?: Partial<{ input: string; puzzleFilename: string }>,
+) {
   let input: string = "";
-  if (!opts?.input) {
-    input = await readFile("src/day2/d2.puzzle.txt");
+  if (opts?.puzzleFilename) {
+    input = await readFile(opts.puzzleFilename);
   } else {
-    input = opts?.input;
+    if (!opts || !opts.input) {
+      console.error("No input provided.");
+      process.exit(1);
+    } else {
+      input = opts.input;
+    }
   }
 
   const games = gamesParser(input);
 
-  // which games have a total of
-  // 12 red cubes, 13 green cubes, and 14 blue cubes
+  const possibleGames = filterPossibleGames(games);
 
+  return gameIdTotals(possibleGames);
+}
+
+function gameIdTotals(games: Game[]): number {
+  const ids = games.map((each) => each.id);
+  return ids.length > 0 ? ids.reduce((p, a) => p + a) : 0;
+}
+
+function filterPossibleGames(games: Game[]): Game[] {
+  const maxCubeColours: ColourCounts = {
+    blue: 14,
+    red: 12,
+    green: 13,
+  };
   const possibleGames = games.filter((game) => {
     const gameColourCounts: ColourCounts = {
       red: 0,
@@ -33,15 +53,12 @@ export async function part1(opts?: { input: string }) {
       gameColourCounts.red = gameColourCounts.red + reveals.red;
     });
     return (
-      gameColourCounts.red >= 12 &&
-      gameColourCounts.green >= 13 &&
-      gameColourCounts.blue >= 14
+      gameColourCounts.red <= maxCubeColours.red &&
+      gameColourCounts.green <= maxCubeColours.green &&
+      gameColourCounts.blue <= maxCubeColours.blue
     );
   });
-
-  // sum of id of those games that pass the test
-  const ids = possibleGames.map((each) => each.id);
-  return ids.length > 0 ? ids.reduce((p, a) => p + a) : [];
+  return possibleGames;
 }
 
 /**
