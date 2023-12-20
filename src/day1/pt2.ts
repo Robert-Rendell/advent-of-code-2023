@@ -21,20 +21,32 @@ const numberWordMapping = [
  * eg. one, two, three, four, five, six, seven, eight, and nine
  */
 export function findCalibrationValue(line: string) {
-  const results = line.match(
+  const searchSearch = line
+    .replace(/oneight/g, "oneeight")
+    .replace(/threeight/g, "threeeight")
+    .replace(/eighthree/g, "eightthree")
+    .replace(/fiveight/g, "fiveeight")
+    .replace(/nineight/g, "nineeight")
+    .replace(/twone/g, "twoone")
+    .replace(/sevenine/g, "sevennine")
+    .replace(/eightwo/g, "eighttwo");
+  const results = searchSearch.match(
     /\d{1}|one|two|three|four|five|six|seven|eight|nine/g,
   );
   if (results) {
     let v = 0;
     let first = results[0];
     let last = results[results.length - 1];
-    const firstFound = numberWordMapping.findIndex((word) => word === first);
-    const lastFound = numberWordMapping.findIndex((word) => word === last);
-    if (firstFound >= 0) {
-      first = "" + firstFound;
+    const firstWordFound = numberWordMapping.findIndex(
+      (word) => word === first,
+    );
+    const lastWordFound = numberWordMapping.findIndex((word) => word === last);
+
+    if (firstWordFound >= 0) {
+      first = "" + (firstWordFound + 1);
     }
-    if (lastFound >= 0) {
-      last = "" + lastFound;
+    if (lastWordFound >= 0) {
+      last = "" + (lastWordFound + 1);
     }
     v = parseInt(first + last);
     return v;
@@ -49,7 +61,7 @@ export async function part2(opts?: { input: string }) {
   }
 
   const lines = (opts?.input ? opts.input : input).split("\n");
-  console.error(lines.length);
+
   const calibrationValues = lines.map((l) => findCalibrationValue(l.trim()));
   const total = sumAllCalibrationValues(calibrationValues);
   return total;

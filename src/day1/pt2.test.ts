@@ -4,7 +4,7 @@ describe("Day 1 - Part 2", () => {
   it("should answer the question correctly", async () => {
     const output = await part2();
 
-    expect(output).toBe(48577);
+    expect(output).toBe(53348);
   });
 
   it("should answer the example correctly", async () => {
@@ -126,6 +126,80 @@ zoneight234
       const output = findCalibrationValue("7mntc");
 
       expect(output).toBe(77);
+    });
+
+    it("should parse the calibration value 99", () => {
+      const output = findCalibrationValue("99");
+
+      expect(output).toBe(99);
+    });
+
+    it("should parse the calibration value 99", () => {
+      const output = findCalibrationValue("ninenine");
+
+      expect(output).toBe(99);
+    });
+
+    it("should parse the calibration value 99", () => {
+      const output = findCalibrationValue("nine");
+
+      expect(output).toBe(99);
+    });
+
+    it("should parse the calibration value 11", () => {
+      const output = findCalibrationValue("one");
+
+      expect(output).toBe(11);
+    });
+
+    it("should parse the calibration value 91", () => {
+      const output = findCalibrationValue("sadfk91");
+
+      expect(output).toBe(91);
+    });
+
+    it("should parse the calibration value oneone", () => {
+      const output = findCalibrationValue("oneone");
+
+      expect(output).toBe(11);
+    });
+
+    it("should parse the calibration value ninefive8fjnjj", () => {
+      const output = findCalibrationValue("ninefive8fjnjj");
+
+      expect(output).toBe(98);
+    });
+
+    it("should parse the calibration value m24njqdqxrjmn1cjprdzdcntwoldzsgfkpvxbrnrg", () => {
+      const output = findCalibrationValue(
+        "m24njqdqxrjmn1cjprdzdcntwoldzsgfkpvxbrnrg",
+      );
+
+      expect(output).toBe(22);
+    });
+
+    it("should parse the calibration value m5sqxstbxp9xx", () => {
+      const output = findCalibrationValue("m5sqxstbxp9xx");
+
+      expect(output).toBe(59);
+    });
+
+    it("should parse the calibration value m5sqxstbxp9xx", () => {
+      const output = findCalibrationValue("m5sqxstbxp9xx");
+
+      expect(output).toBe(59);
+    });
+
+    it("should parse the calibration value eighthree", () => {
+      const output = findCalibrationValue("eighthree");
+
+      expect(output).toBe(83);
+    });
+
+    it("should parse the calibration value sevenine", () => {
+      const output = findCalibrationValue("sevenine");
+
+      expect(output).toBe(79);
     });
   });
 });
