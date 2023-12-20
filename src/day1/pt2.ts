@@ -2,7 +2,6 @@ import { readFile } from "../utils/read-file";
 import { sumAllCalibrationValues } from "./pt1";
 
 const numberWordMapping = [
-  "zero",
   "one",
   "two",
   "three",
@@ -17,6 +16,9 @@ const numberWordMapping = [
  * On each line, the calibration value can be found by
  * combining the first digit and the last digit (in that
  * order) to form a single two-digit number.
+ *
+ * eg. 1,2,3,4,5,6,7,8,9
+ * eg. one, two, three, four, five, six, seven, eight, and nine
  */
 export function findCalibrationValue(line: string) {
   const results = line.match(
@@ -47,7 +49,8 @@ export async function part2(opts?: { input: string }) {
   }
 
   const lines = (opts?.input ? opts.input : input).split("\n");
-  const calibrationValues = lines.map((l) => findCalibrationValue(l));
+  console.error(lines.length);
+  const calibrationValues = lines.map((l) => findCalibrationValue(l.trim()));
   const total = sumAllCalibrationValues(calibrationValues);
   return total;
 }
