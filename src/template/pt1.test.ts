@@ -1,3 +1,3 @@
-describe("Day 1 - Part 1", () => {
+describe("Day x - Part 1", () => {
   it("should answer correctly", () => {});
 });
