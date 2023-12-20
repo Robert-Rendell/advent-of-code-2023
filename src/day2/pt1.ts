@@ -12,6 +12,8 @@ export async function part1(opts?: { input: string }) {
   let input: string = "";
   if (!opts?.input) {
     input = await readFile("src/day2/d2.puzzle.txt");
+  } else {
+    input = opts?.input;
   }
 
   const games = gamesParser(input);
@@ -31,14 +33,15 @@ export async function part1(opts?: { input: string }) {
       gameColourCounts.red = gameColourCounts.red + reveals.red;
     });
     return (
-      gameColourCounts.red === 12 &&
-      gameColourCounts.green === 13 &&
-      gameColourCounts.blue === 14
+      gameColourCounts.red >= 12 &&
+      gameColourCounts.green >= 13 &&
+      gameColourCounts.blue >= 14
     );
   });
 
   // sum of id of those games that pass the test
-  return possibleGames.map((each) => each.id).reduce((p, a) => p + a);
+  const ids = possibleGames.map((each) => each.id);
+  return ids.length > 0 ? ids.reduce((p, a) => p + a) : [];
 }
 
 /**
@@ -59,14 +62,9 @@ export function gamesParser(input: string): Game[] {
   const games: Game[] = lines.map((l) => {
     // eg. 'Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green'
     const [gameSplit, allRevealsSplit] = l.split(":");
-
     // eg. 'Game 1'
-    const [_, gameId] = gameSplit.split(" ");
-
-    // eg. ' 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green'
-
+    const [_, gameId] = gameSplit.split(" ").map((each) => each.trim());
     const reveals = parseReveals(allRevealsSplit);
-
     return {
       id: parseInt(gameId),
       reveals,
@@ -80,7 +78,7 @@ export function gamesParser(input: string): Game[] {
  * Takes an input like:
  * ' 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green'
  */
-function parseReveals(allRevealsSplit: string) {
+function parseReveals(allRevealsSplit: string): GameReveal[] {
   const revealsSplit = allRevealsSplit.split(";");
   const reveals = revealsSplit.map((r, i) => {
     // eg. ' 3 blue, 4 red'
@@ -94,7 +92,6 @@ function parseReveals(allRevealsSplit: string) {
       const cubeRevealSplit = cubeReveal.split(" ");
       const numberOfCubes = cubeRevealSplit[0];
       const cubeColour = cubeRevealSplit[1] as CubeColor;
-      console.log(cubeRevealSplit);
       reveal[cubeColour] = parseInt(numberOfCubes);
     });
     return reveal;

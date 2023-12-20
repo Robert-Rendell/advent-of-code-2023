@@ -1,3 +1,1 @@
-export async function part1(opts?: { input: string }) {
-
-}
+export async function part1(opts?: { input: string }) {}
