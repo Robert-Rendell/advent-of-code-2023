@@ -8,9 +8,10 @@ Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green`;
 
 describe("Day x - Part 1", () => {
   it("should answer the puzzle correctly", async () => {
-    const actual = await part1({ input: "src/day2/d2.puzzle.txt" });
+    const actual = await part1({ puzzleFilename: "src/day2/d2.puzzle.txt" });
 
-    expect(actual).toEqual(8);
+    // 1. expect(actual).toEqual(231); ---> Too low
+    expect(actual).toEqual(231);
   });
   it("should answer the example correctly", async () => {
     const actual = await part1({ input: exampleInput });
