@@ -36,26 +36,19 @@ function gameIdTotals(games: Game[]): number {
 
 function filterPossibleGames(games: Game[]): Game[] {
   const maxCubeColours: ColourCounts = {
-    blue: 14,
     red: 12,
     green: 13,
+    blue: 14,
   };
   const possibleGames = games.filter((game) => {
-    const gameColourCounts: ColourCounts = {
-      red: 0,
-      blue: 0,
-      green: 0,
-    };
-    game.reveals.forEach((reveals) => {
-      gameColourCounts.blue = gameColourCounts.blue + reveals.blue;
-      gameColourCounts.green = gameColourCounts.green + reveals.green;
-      gameColourCounts.red = gameColourCounts.red + reveals.red;
+    const possibleReveals = game.reveals.map((reveal) => {
+      return (
+        reveal.red <= maxCubeColours.red &&
+        reveal.green <= maxCubeColours.green &&
+        reveal.blue <= maxCubeColours.blue
+      );
     });
-    return (
-      gameColourCounts.red <= maxCubeColours.red &&
-      gameColourCounts.green <= maxCubeColours.green &&
-      gameColourCounts.blue <= maxCubeColours.blue
-    );
+    return possibleReveals.every((isRevealPossible) => isRevealPossible);
   });
   console.log(possibleGames.map((pg) => pg.id));
   return possibleGames;

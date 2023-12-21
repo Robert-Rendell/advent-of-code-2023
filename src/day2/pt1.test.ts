@@ -13,7 +13,9 @@ describe("Day x - Part 1", () => {
     // 1. expect(actual).toEqual(231); ---> Too low
     // 2. expect(actual).toEqual(485); ---> Too low
     // 3. expect(actual).toEqual(3630); ---> Too high
-    expect(actual).toEqual(231);
+
+    // Changed counting algorithm after reading spec again (puts them back in after each reveal)
+    expect(actual).toEqual(2169);
   });
   it("should answer the example correctly", async () => {
     const actual = await part1({ input: exampleInput });
@@ -36,9 +38,6 @@ describe("Day x - Part 1", () => {
           input:
             "Game 19: 3 blue, 3 red; 1 blue, 2 red, 4 green; 4 green, 2 red; 7 blue, 1 red",
         });
-        // 9 red
-        // 8 green
-        // 11 blue
         expect(actual).toEqual(19);
       });
 
@@ -48,6 +47,44 @@ describe("Day x - Part 1", () => {
         });
 
         const sumOfTheIds = 46;
+        expect(actual).toEqual(sumOfTheIds);
+      });
+
+      it("should mark game 100 as valid", async () => {
+        const actual = await part1({
+          input:
+            "Game 100: 8 red, 2 blue, 1 green; 2 blue, 4 red, 2 green; 9 red, 1 green; 2 green, 2 red; 3 red, 5 blue; 5 blue, 8 red",
+        });
+        const sumOfTheIds = 100;
+        expect(actual).toEqual(sumOfTheIds);
+      });
+
+      it("should mark game 64 as valid", async () => {
+        const actual = await part1({
+          input:
+            "Game 64: 5 red, 1 blue, 5 green; 10 red, 4 green, 2 blue; 8 red, 1 blue",
+        });
+
+        const sumOfTheIds = 64;
+        expect(actual).toEqual(sumOfTheIds);
+      });
+
+      it("should mark game 99 as valid", async () => {
+        const actual = await part1({
+          input:
+            "Game 99: 3 blue, 8 green, 1 red; 4 green, 1 blue, 2 red; 1 red, 4 green; 2 blue, 4 green",
+        });
+
+        const sumOfTheIds = 99;
+        expect(actual).toEqual(sumOfTheIds);
+      });
+
+      it("should mark game 91 as valid", async () => {
+        const actual = await part1({
+          input:
+            "Game 91: 1 green; 9 green, 2 red, 2 blue; 3 blue, 12 green, 1 red; 2 red, 1 blue, 6 green",
+        });
+        const sumOfTheIds = 91;
         expect(actual).toEqual(sumOfTheIds);
       });
     });
@@ -81,38 +118,6 @@ describe("Day x - Part 1", () => {
         expect(actual).toEqual(sumOfTheIds);
       });
 
-      it("should mark game 100 as invalid", async () => {
-        const actual = await part1({
-          input:
-            "Game 100: 8 red, 2 blue, 1 green; 2 blue, 4 red, 2 green; 9 red, 1 green; 2 green, 2 red; 3 red, 5 blue; 5 blue, 8 red",
-        });
-        // red = 8 + 4 + 9 + 2 + 3 + 8
-        const sumOfTheIds = 0;
-        expect(actual).toEqual(sumOfTheIds);
-      });
-
-      it("should mark game 64 as invalid", async () => {
-        const actual = await part1({
-          input:
-            "Game 64: 5 red, 1 blue, 5 green; 10 red, 4 green, 2 blue; 8 red, 1 blue",
-        });
-
-        // red > 13
-        const sumOfTheIds = 0;
-        expect(actual).toEqual(sumOfTheIds);
-      });
-
-      it("should mark game 99 as invalid", async () => {
-        const actual = await part1({
-          input:
-            "Game 99: 3 blue, 8 green, 1 red; 4 green, 1 blue, 2 red; 1 red, 4 green; 2 blue, 4 green",
-        });
-
-        // green > 13
-        const sumOfTheIds = 0;
-        expect(actual).toEqual(sumOfTheIds);
-      });
-
       it("should mark game 17 as invalid", async () => {
         const actual = await part1({
           input:
@@ -126,15 +131,6 @@ describe("Day x - Part 1", () => {
         const actual = await part1({
           input:
             "Game 81: 8 red, 11 green, 13 blue; 9 red, 14 blue, 14 green; 14 blue, 11 green, 1 red; 5 red, 13 green, 3 blue; 4 green, 9 red, 2 blue; 11 red, 5 blue, 2 green",
-        });
-        const sumOfTheIds = 0;
-        expect(actual).toEqual(sumOfTheIds);
-      });
-
-      it("should mark game 91 as invalid", async () => {
-        const actual = await part1({
-          input:
-            "Game 91: 1 green; 9 green, 2 red, 2 blue; 3 blue, 12 green, 1 red; 2 red, 1 blue, 6 green",
         });
         const sumOfTheIds = 0;
         expect(actual).toEqual(sumOfTheIds);
