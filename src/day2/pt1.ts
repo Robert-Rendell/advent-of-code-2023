@@ -2,16 +2,17 @@ import { readFile } from "../utils/read-file";
 
 export type CubeColor = "blue" | "red" | "green";
 export type GameReveal = Record<CubeColor, number>;
-export type ColourCounts = Record<CubeColor, number>;
 export type Game = {
   id: number;
   reveals: GameReveal[];
 };
 
+export type ColourCounts = Record<CubeColor, number>;
+
 export async function part1(
   opts?: Partial<{ input: string; puzzleFilename: string }>,
 ) {
-  let input: string = "";
+  let input: string;
   if (opts?.puzzleFilename) {
     input = await readFile(opts.puzzleFilename);
   } else {
@@ -24,9 +25,7 @@ export async function part1(
   }
 
   const games = gamesParser(input);
-
   const possibleGames = filterPossibleGames(games);
-
   return gameIdTotals(possibleGames);
 }
 
@@ -87,7 +86,6 @@ export function gamesParser(input: string): Game[] {
       reveals,
     };
   });
-  // TODO
   return games;
 }
 
