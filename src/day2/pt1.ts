@@ -1,6 +1,6 @@
 import { readFile } from "../utils/read-file";
 
-export type CubeColor = "blue" | "red" | "green";
+export type CubeColor = "red" | "green" | "blue";
 export type GameReveal = Record<CubeColor, number>;
 export type Game = {
   id: number;
