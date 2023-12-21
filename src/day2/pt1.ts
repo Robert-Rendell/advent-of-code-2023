@@ -57,6 +57,7 @@ function filterPossibleGames(games: Game[]): Game[] {
       gameColourCounts.blue <= maxCubeColours.blue
     );
   });
+  console.log(possibleGames.map((pg) => pg.id));
   return possibleGames;
 }
 
