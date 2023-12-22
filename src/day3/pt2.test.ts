@@ -5,7 +5,7 @@ describe("Day 3 - Part 2", () => {
     const actual = await part2({
       puzzleFilePath: "src/day3/puzzles/d3-puzzle.txt",
     });
-    expect(actual).toEqual("-----");
+    expect(actual).toEqual(84495585);
   });
 
   it("should answer the example correctly", async () => {

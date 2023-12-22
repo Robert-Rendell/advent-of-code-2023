@@ -130,26 +130,32 @@ export class EngineSchematic extends Array<Array<string>> {
     const pns = this.getPartNumbers();
 
     const asteriskCoords = pns.map((pn) => pn.asteriskCoord);
-    const asteriskFrequencyTable: Record<string, number> = {};
+    const asteriskFrequencyTable: Record<string, PartNumber[]> = {};
 
     asteriskCoords.forEach((ac) => {
-      asteriskFrequencyTable[JSON.stringify(ac)] = 0;
-      pns.forEach((pn) => {
-        const asteriskCoord = JSON.stringify(pn.asteriskCoord);
-        asteriskFrequencyTable[asteriskCoord] =
-          asteriskFrequencyTable[asteriskCoord] + 1;
-      });
+      asteriskFrequencyTable[JSON.stringify(ac)] = [];
     });
 
-    const gears = getEntries(asteriskFrequencyTable).filter(
-      ([k, v]) => v === 2,
-    );
+    pns.forEach((pn) => {
+      const asteriskCoord = JSON.stringify(pn.asteriskCoord);
+      asteriskFrequencyTable[asteriskCoord].push(pn);
+    });
 
-    console.log(gears);
-    return [];
+    const gears = getEntries(asteriskFrequencyTable)
+      .filter(([k, v]) => v.length === 2)
+      .map(([k, v]) => {
+        const gear: Gear = {
+          a: v[0],
+          b: v[1],
+          coord: JSON.parse(k),
+        };
+        return gear;
+      });
+
+    return gears;
   }
 
   public getGearRatios(gears: Gear[]): number[] {
-    return [];
+    return gears.map((g) => g.a.numberValue() * g.b.numberValue());
   }
 }
