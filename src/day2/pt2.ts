@@ -64,6 +64,5 @@ function filterPossibleGames(games: Game[]): Game[] {
     });
     return possibleReveals.every((isRevealPossible) => isRevealPossible);
   });
-  console.log(possibleGames.map((pg) => pg.id));
   return possibleGames;
 }

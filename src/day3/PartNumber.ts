@@ -1,7 +1,10 @@
+import { Cell } from "./types/cell";
 import { EngineSchematicCell } from "./types/engine-schematic-cell";
 
 export class PartNumber {
-  cells: EngineSchematicCell[];
+  public cells: EngineSchematicCell[];
+
+  public asteriskCoord: Cell | undefined;
 
   constructor() {
     this.cells = [];

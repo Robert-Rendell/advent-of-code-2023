@@ -1,7 +1,9 @@
+import { getEntries } from "../types/entries";
 import { PartNumber } from "./PartNumber";
 import { Cell } from "./types/cell";
 import { Coord } from "./types/coord";
 import { EngineSchematicCell } from "./types/engine-schematic-cell";
+import { Gear } from "./types/gear";
 
 export class EngineSchematic extends Array<Array<string>> {
   constructor(input: string) {
@@ -66,7 +68,11 @@ export class EngineSchematic extends Array<Array<string>> {
   }
 
   private isSymbol(value: string) {
-    return isNaN(parseInt(value)) && value !== ".";
+    return this.isSymbolOrDot(value) && value !== ".";
+  }
+
+  private isAsterisk(value: string) {
+    return value === "*";
   }
 
   private getPotentialPartNumbers(): PartNumber[] {
@@ -104,10 +110,46 @@ export class EngineSchematic extends Array<Array<string>> {
 
       isPartNumber = ppn.cells.some((cell) => {
         const ns = this.neighbouringCells(cell);
-        return ns.some((n) => this.isSymbol(n.value));
+        return ns.some((n) => {
+          const isSymbol = this.isSymbol(n.value);
+          if (isSymbol && this.isAsterisk(n.value)) {
+            ppn.asteriskCoord = {
+              x: n.x,
+              y: n.y,
+            };
+          }
+          return isSymbol;
+        });
       });
 
       return isPartNumber;
     });
+  }
+
+  public getGears(): Gear[] {
+    const pns = this.getPartNumbers();
+
+    const asteriskCoords = pns.map((pn) => pn.asteriskCoord);
+    const asteriskFrequencyTable: Record<string, number> = {};
+
+    asteriskCoords.forEach((ac) => {
+      asteriskFrequencyTable[JSON.stringify(ac)] = 0;
+      pns.forEach((pn) => {
+        const asteriskCoord = JSON.stringify(pn.asteriskCoord);
+        asteriskFrequencyTable[asteriskCoord] =
+          asteriskFrequencyTable[asteriskCoord] + 1;
+      });
+    });
+
+    const gears = getEntries(asteriskFrequencyTable).filter(
+      ([k, v]) => v === 2,
+    );
+
+    console.log(gears);
+    return [];
+  }
+
+  public getGearRatios(gears: Gear[]): number[] {
+    return [];
   }
 }
