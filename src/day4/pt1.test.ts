@@ -12,6 +12,6 @@ describe("Day 4 - Part 1", () => {
     const actual = await part1({
       puzzleFilePath: "src/day4/puzzles/d4-example.txt",
     });
-    expect(actual).toEqual("------");
+    expect(actual).toEqual(13);
   });
 });
