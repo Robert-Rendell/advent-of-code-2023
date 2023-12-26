@@ -1,4 +1,5 @@
 import { readFile } from "../utils/read-file";
+import { scratchCardParser } from "./parser/scratch-card-parser";
 
 export async function part2(
   opts: { input: string } | { puzzleFilePath: string },
@@ -9,4 +10,6 @@ export async function part2(
   } else {
     input = opts.input;
   }
+
+  const scratchCards = scratchCardParser(input);
 }
