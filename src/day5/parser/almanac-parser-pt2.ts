@@ -19,6 +19,5 @@ function seedParser(seedLine: string): AlmanacSeedRange[] {
     const [start, count] = sr.split(" ").map((n) => parseInt(n));
     return { start, count };
   });
-  console.log(seedRanges.length);
   return seedRanges;
 }

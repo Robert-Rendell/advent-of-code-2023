@@ -13,12 +13,12 @@ export class AlmanacPt2 extends Almanac {
   getLowestSeedLocation() {
     let lowestSeedLocation = Number.MAX_VALUE;
     this.seedRanges.forEach((sr, i) => {
-      console.log(sr, `(Index ${i})`);
+      console.log(sr, `(Progress ${i + 1}/${this.seedRanges.length})`);
       for (let seed = sr.start; seed < sr.start + sr.count; seed++) {
         const mapping = this.getMappings(seed);
         if (mapping.location < lowestSeedLocation) {
           lowestSeedLocation = mapping.location;
-          console.log("Lowest Seed Updated", lowestSeedLocation);
+          console.log("Lowest seed location updated ->", lowestSeedLocation);
         }
       }
     });
