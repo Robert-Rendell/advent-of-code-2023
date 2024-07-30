@@ -13,6 +13,7 @@ describe("Day 4 - Part 2", () => {
        - 14 instances of card 5
        - and 1 instance of card 6.
     */
+    console.log(actual);
     expect(actual.filter((n) => n === 1).length).toEqual(1);
     expect(actual.filter((n) => n === 2).length).toEqual(2);
     expect(actual.filter((n) => n === 3).length).toEqual(4);
