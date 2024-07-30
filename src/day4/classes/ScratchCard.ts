@@ -8,7 +8,10 @@ export class ScratchCard {
   cardNumber: number;
 
   constructor(
-    initialValues: Omit<ExcludeMethods<ScratchCard>, "numberOfCopies" | "cardNumber">,
+    initialValues: Omit<
+      ExcludeMethods<ScratchCard>,
+      "numberOfCopies" | "cardNumber"
+    >,
   ) {
     this.id = initialValues.id;
     this.winningNumbers = initialValues.winningNumbers;

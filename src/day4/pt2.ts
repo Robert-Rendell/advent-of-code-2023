@@ -17,44 +17,32 @@ export async function part2(
     return card.calculateCardCopies({ max });
   });
 
-  console.log(copies1);
-
   const copies2 = copies1.flat().map((n) => {
-    const scratchCard = originalScratchCards.find(
-      (sc) => sc.cardNumber === n,
-    );
+    const scratchCard = originalScratchCards.find((sc) => sc.cardNumber === n);
     return scratchCard?.calculateCardCopies({ max }) ?? [];
   });
 
   const copies3 = copies2.flat().map((n) => {
-    const scratchCard = originalScratchCards.find(
-      (sc) => sc.cardNumber === n,
-    );
+    const scratchCard = originalScratchCards.find((sc) => sc.cardNumber === n);
     return scratchCard?.calculateCardCopies({ max }) ?? [];
   });
 
   const copies4 = copies3.flat().map((n) => {
-    const scratchCard = originalScratchCards.find(
-      (sc) => sc.cardNumber === n,
-    );
+    const scratchCard = originalScratchCards.find((sc) => sc.cardNumber === n);
     return scratchCard?.calculateCardCopies({ max }) ?? [];
   });
 
   const copies5 = copies4.flat().map((n) => {
-    const scratchCard = originalScratchCards.find(
-      (sc) => sc.cardNumber === n,
-    );
+    const scratchCard = originalScratchCards.find((sc) => sc.cardNumber === n);
     return scratchCard?.calculateCardCopies({ max }) ?? [];
   });
 
   const copies6 = copies5.flat().map((n) => {
-    const scratchCard = originalScratchCards.find(
-      (sc) => sc.cardNumber === n,
-    );
+    const scratchCard = originalScratchCards.find((sc) => sc.cardNumber === n);
     return scratchCard?.calculateCardCopies({ max }) ?? [];
   });
 
-  console.log(originalScratchCards);
+  console.log(originalScratchCards.map((sc) => sc.cardNumber));
   console.log(copies1.flat());
   console.log(copies2.flat());
   console.log(copies3.flat());
