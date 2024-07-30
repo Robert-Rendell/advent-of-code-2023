@@ -54,6 +54,7 @@ export async function part2(
     return scratchCard?.calculateCardCopies({ max });
   });
 
+  console.log(originalScratchCards);
   console.log(copies1.flat());
   console.log(copies2.flat());
   console.log(copies3.flat());
@@ -73,5 +74,8 @@ export async function part2(
   console.log("All Originals: " + originalScratchCards.length);
 
   // "how many total scratchcards do you end up with?" -->
-  return allCopies.flat(max).length + originalScratchCards.length;
+  return [
+    ...originalScratchCards.map((sc) => sc.cardNumber()),
+    ...allCopies,
+  ].sort();
 }
