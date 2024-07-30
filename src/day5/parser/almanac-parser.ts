@@ -7,15 +7,19 @@ export type AlmanacSeedFn = (seedLine: string) => number[];
 
 export function almanacParser(input: string, seedFn?: AlmanacSeedFn): Almanac {
   const lines = input.split("\n");
-  const seeds = seedFn
-    ? seedFn(lines[0])
-    : lines[0]
-        .replace("seeds: ", "")
-        .split(" ")
-        .map((seedStr) => parseInt(seedStr));
+  const seeds = lines[0]
+    .replace("seeds: ", "")
+    .split(" ")
+    .map((seedStr) => parseInt(seedStr));
 
   return new Almanac({
     seeds,
+    ...parseMaps(lines),
+  });
+}
+
+export function parseMaps(lines: string[]) {
+  return {
     seedToSoilMap: parseMap("seed-to-soil map:", lines),
     soilToFertiliserMap: parseMap("soil-to-fertilizer map:", lines),
     fertiliserToWaterMap: parseMap("fertilizer-to-water map:", lines),
@@ -23,7 +27,7 @@ export function almanacParser(input: string, seedFn?: AlmanacSeedFn): Almanac {
     lightToTemperatureMap: parseMap("light-to-temperature map:", lines),
     temperatureToHumidity: parseMap("temperature-to-humidity map:", lines),
     humidityToLocation: parseMap("humidity-to-location map:", lines),
-  });
+  };
 }
 
 function parseMap(mapId: string, lines: string[]): AlmanacMap {

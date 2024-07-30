@@ -1,6 +1,5 @@
 import { readFile } from "../utils/read-file";
-import { almanacParser } from "./parser/almanac-parser";
-import { seedParser } from "./parser/pt2-seed-parser";
+import { almanacParserPt2 } from "./parser/almanac-parser-pt2";
 
 export async function part2(
   opts: { input: string } | { puzzleFilePath: string },
@@ -12,7 +11,7 @@ export async function part2(
     input = opts.input;
   }
 
-  const almanac = almanacParser(input, seedParser);
+  const almanac = almanacParserPt2(input);
 
   return almanac;
 }
