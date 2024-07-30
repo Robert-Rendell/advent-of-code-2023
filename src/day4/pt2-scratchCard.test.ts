@@ -15,7 +15,7 @@ describe("Day 4 - Part 2 - Scratch card tests", () => {
 
     it("should parse the scratch card number correctly", async () => {
       const actual = scratchCardParser(card);
-      expect(actual[0].cardNumber()).toEqual(1);
+      expect(actual[0].cardNumber).toEqual(1);
     });
 
     it("should calculate winning card copies correctly", async () => {
@@ -39,7 +39,7 @@ describe("Day 4 - Part 2 - Scratch card tests", () => {
 
     it("should parse the scratch card number correctly", async () => {
       const actual = scratchCardParser(card);
-      expect(actual[0].cardNumber()).toEqual(1);
+      expect(actual[0].cardNumber).toEqual(1);
     });
 
     it("should calculate winning card copies correctly", async () => {

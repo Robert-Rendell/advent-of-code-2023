@@ -75,7 +75,7 @@ export async function part2(
 
   // "how many total scratchcards do you end up with?" -->
   return [
-    ...originalScratchCards.map((sc) => sc.cardNumber()),
-    ...allCopies,
+    ...originalScratchCards.map((sc) => sc.cardNumber),
+    ...allCardCopies.flat(),
   ].sort();
 }

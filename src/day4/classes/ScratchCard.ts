@@ -5,14 +5,16 @@ export class ScratchCard {
   winningNumbers: number[];
   yourNumbers: number[];
   numberOfCopies: number;
+  cardNumber: number;
 
   constructor(
-    initialValues: Omit<ExcludeMethods<ScratchCard>, "numberOfCopies">,
+    initialValues: Omit<ExcludeMethods<ScratchCard>, "numberOfCopies" | "cardNumber">,
   ) {
     this.id = initialValues.id;
     this.winningNumbers = initialValues.winningNumbers;
     this.yourNumbers = initialValues.yourNumbers;
     this.numberOfCopies = 0;
+    this.cardNumber = parseInt(this.id.replace("Card", "").trim());
   }
 
   /**
@@ -29,7 +31,7 @@ export class ScratchCard {
   }
 
   calculateCardCopies(args: { max: number }): number[] {
-    const n = this.cardNumber();
+    const n = this.cardNumber;
     const matches = this.numberOfMatches();
     const cardCopyNumbers: number[] = [];
     for (let x = n + 1; x < matches + n + 1; x++) {
@@ -42,10 +44,6 @@ export class ScratchCard {
 
   numberOfMatches(): number {
     return this.matches().length;
-  }
-
-  cardNumber(): number {
-    return parseInt(this.id.replace("Card", "").trim());
   }
 
   /**
