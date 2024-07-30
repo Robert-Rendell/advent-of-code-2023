@@ -44,6 +44,7 @@ export function almanacParser(input: string): Almanac {
 }
 
 function parseMap(mapId: string, lines: string[]) {
+  console.log("Parsing map", mapId);
   const rangesIndex = lines.findIndex((line) => line.includes(mapId));
   let nextLine = lines[rangesIndex + 1];
   let i = 0;

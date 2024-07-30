@@ -100,9 +100,9 @@ describe("Day x - Part 1", () => {
     expect(almanac.getLowestSeedLocation()).toEqual(35);
   });
   it("should answer the puzzle correctly", async () => {
-    const actual = await part1({
-      puzzleFilePath: "src/dayX/puzzles/dX-puzzle.txt",
+    const almanac = await part1({
+      puzzleFilePath: "src/day5/puzzles/d5-puzzle.txt",
     });
-    expect(actual).toEqual("-----------");
+    expect(almanac.getLowestSeedLocation()).toEqual("-----------");
   });
 });
