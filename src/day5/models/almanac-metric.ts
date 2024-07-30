@@ -1,4 +1,4 @@
-type AlmanacMetric =
+export type AlmanacMetric =
   | "seed"
   | "soil"
   | "fertiliser"

@@ -1,4 +1,3 @@
-import { Almanac } from "./classes/Almanac";
 import { AlmanacBreakdown } from "./models/almanac-breakdown";
 import { part1 } from "./pt1";
 
