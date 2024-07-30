@@ -13,6 +13,6 @@ export async function part1(
 
   const scratchCards = scratchCardParser(input);
 
-  // How many points are they worth in total?
+  // "How many points are they worth in total?" -->
   return scratchCards.map((sc) => sc.points()).reduce((p, c) => p + c);
 }
