@@ -21,35 +21,35 @@ export async function part2(
 
   const copies2 = copies1.flat().map((n) => {
     const scratchCard = originalScratchCards.find(
-      (sc) => sc.cardNumber() === n,
+      (sc) => sc.cardNumber === n,
     );
     return scratchCard?.calculateCardCopies({ max });
   });
 
   const copies3 = copies2.flat().map((n) => {
     const scratchCard = originalScratchCards.find(
-      (sc) => sc.cardNumber() === n,
+      (sc) => sc.cardNumber === n,
     );
     return scratchCard?.calculateCardCopies({ max });
   });
 
   const copies4 = copies3.flat().map((n) => {
     const scratchCard = originalScratchCards.find(
-      (sc) => sc.cardNumber() === n,
+      (sc) => sc.cardNumber === n,
     );
     return scratchCard?.calculateCardCopies({ max });
   });
 
   const copies5 = copies4.flat().map((n) => {
     const scratchCard = originalScratchCards.find(
-      (sc) => sc.cardNumber() === n,
+      (sc) => sc.cardNumber === n,
     );
     return scratchCard?.calculateCardCopies({ max });
   });
 
   const copies6 = copies5.flat().map((n) => {
     const scratchCard = originalScratchCards.find(
-      (sc) => sc.cardNumber() === n,
+      (sc) => sc.cardNumber === n,
     );
     return scratchCard?.calculateCardCopies({ max });
   });
@@ -76,6 +76,6 @@ export async function part2(
   // "how many total scratchcards do you end up with?" -->
   return [
     ...originalScratchCards.map((sc) => sc.cardNumber),
-    ...allCardCopies.flat(),
+    ...allCopies.flat(),
   ].sort();
 }
