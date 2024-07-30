@@ -22,13 +22,16 @@ export async function part2(
   const allCardCopies = [...copies1.flat()];
   let previouslyCalculatedCopies = copies1;
   for (let x = 1; x < max - 1; x++) {
+    console.log(x);
     const copies = previouslyCalculatedCopies.flat().map((n) => {
       const scratchCard = originalScratchCards.find(
         (sc) => sc.cardNumber === n,
       );
       return scratchCard?.calculateCardCopies({ max }) ?? [];
     });
-    allCardCopies.push(...copies.flat());
+    for (const x of copies.flat()) {
+      allCardCopies.push(x);
+    }
     previouslyCalculatedCopies = copies;
   }
 
