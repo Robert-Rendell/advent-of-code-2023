@@ -1,3 +1,4 @@
+import { Almanac, AlmanacBreakdown } from "./classes/Almanac";
 import { part1 } from "./pt1";
 
 describe("Day x - Part 1", () => {
@@ -35,16 +36,68 @@ describe("Day x - Part 1", () => {
     Seed 55, soil 57, fertilizer 57, water 53, light 46, temperature 82, humidity 82, location 86.
     Seed 13, soil 13, fertilizer 52, water 41, light 34, temperature 34, humidity 35, location 35.
   */
-    const actual = await part1({
-      puzzleFilePath: "src/dayX/puzzles/dX-example.txt",
+    const almanac = await part1({
+      puzzleFilePath: "src/day5/puzzles/d5-example.txt",
     });
-    expect(actual).toEqual("------");
+    const expectedBreakdownSeed79: AlmanacBreakdown = {
+      seed: 79,
+      soil: 81,
+      fertiliser: 81,
+      water: 81,
+      light: 74,
+      temp: 78,
+      humidity: 78,
+      location: 82,
+    };
+    const expectedBreakdownSeed14: AlmanacBreakdown = {
+      seed: 14,
+      soil: 14,
+      fertiliser: 53,
+      water: 49,
+      light: 42,
+      temp: 42,
+      humidity: 43,
+      location: 43,
+    };
+    const expectedBreakdownSeed13: AlmanacBreakdown = {
+      seed: 13,
+      soil: 13,
+      fertiliser: 52,
+      water: 41,
+      light: 34,
+      temp: 34,
+      humidity: 35,
+      location: 35,
+    };
+    const expectedBreakdownSeed55: AlmanacBreakdown = {
+      seed: 55,
+      soil: 57,
+      fertiliser: 57,
+      water: 53,
+      light: 46,
+      temp: 82,
+      humidity: 82,
+      location: 86,
+    };
+    expect(almanac.getAllSeedMappings().find((v) => v.seed === 79)).toEqual(
+      expectedBreakdownSeed79,
+    );
+    expect(almanac.getAllSeedMappings().find((v) => v.seed === 14)).toEqual(
+      expectedBreakdownSeed14,
+    );
+    expect(almanac.getAllSeedMappings().find((v) => v.seed === 55)).toEqual(
+      expectedBreakdownSeed55,
+    );
+    expect(almanac.getAllSeedMappings().find((v) => v.seed === 13)).toEqual(
+      expectedBreakdownSeed13,
+    );
   });
   it("should answer the example correctly", async () => {
-    const actual = await part1({
-      puzzleFilePath: "src/dayX/puzzles/dX-example.txt",
+    const almanac = await part1({
+      puzzleFilePath: "src/day5/puzzles/d5-example.txt",
     });
-    expect(actual).toEqual(35);
+
+    expect(almanac.getLowestSeedLocation()).toEqual(35);
   });
   it("should answer the puzzle correctly", async () => {
     const actual = await part1({
