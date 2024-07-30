@@ -1,16 +1,7 @@
 import { ExcludeMethods } from "../../types/exclude-methods";
+import { AlmanacBreakdown } from "../models/almanac-breakdown";
+import { AlmanacMap } from "../models/almanac-map";
 
-type AlmanacMap = Record<number, number>;
-type AlmanacMetric =
-  | "seed"
-  | "soil"
-  | "fertiliser"
-  | "water"
-  | "light"
-  | "temp"
-  | "humidity"
-  | "location";
-export type AlmanacBreakdown = Record<AlmanacMetric, number>;
 export class Almanac {
   seeds: number[];
   seedToSoilMap: AlmanacMap;
@@ -32,12 +23,13 @@ export class Almanac {
     this.humidityToLocation = initialValues.humidityToLocation;
   }
 
-  map(source: number, map: Record<number, number>) {
-    const destination: number | undefined = map[source];
-    if (typeof destination === "undefined") {
-      return source;
+  map(source: number, map: AlmanacMap) {
+    for (const rng of map.ranges) {
+      if (source >= rng.source && source <= rng.source + rng.range) {
+        return rng.destination + (source - rng.source);
+      }
     }
-    return destination;
+    return source;
   }
 
   getMappings(seed: number): AlmanacBreakdown {
@@ -45,8 +37,8 @@ export class Almanac {
     const fertiliser = this.map(soil, this.soilToFertiliserMap);
     const water = this.map(fertiliser, this.fertiliserToWaterMap);
     const light = this.map(water, this.waterToLightMap);
-    const temp = this.map(light, this.lightToTemperatureMap);
-    const humidity = this.map(temp, this.temperatureToHumidity);
+    const temperature = this.map(light, this.lightToTemperatureMap);
+    const humidity = this.map(temperature, this.temperatureToHumidity);
     const location = this.map(humidity, this.humidityToLocation);
     return {
       seed,
@@ -54,7 +46,7 @@ export class Almanac {
       fertiliser,
       water,
       light,
-      temp,
+      temperature,
       humidity,
       location,
     } as const;

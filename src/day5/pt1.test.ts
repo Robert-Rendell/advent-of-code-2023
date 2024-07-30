@@ -1,16 +1,16 @@
-import { Almanac, AlmanacBreakdown } from "./classes/Almanac";
+import { Almanac } from "./classes/Almanac";
+import { AlmanacBreakdown } from "./models/almanac-breakdown";
 import { part1 } from "./pt1";
 
-describe("Day x - Part 1", () => {
+describe("Day 5 - Part 1", () => {
   it("should parse the seed numbers correctly", async () => {
     /*
       seeds: 79 14 55 13
     */
-    const actual = await part1({
+    const almanac = await part1({
       puzzleFilePath: "src/day5/puzzles/d5-example.txt",
     });
-    const expected = [79, 14, 55, 13];
-    expect(actual.seeds).toEqual(expected);
+    expect(almanac.seeds).toEqual([79, 14, 55, 13]);
   });
 
   it("should map the specific seed numbers to soil numbers correctly", async () => {
@@ -45,7 +45,7 @@ describe("Day x - Part 1", () => {
       fertiliser: 81,
       water: 81,
       light: 74,
-      temp: 78,
+      temperature: 78,
       humidity: 78,
       location: 82,
     };
@@ -55,7 +55,7 @@ describe("Day x - Part 1", () => {
       fertiliser: 53,
       water: 49,
       light: 42,
-      temp: 42,
+      temperature: 42,
       humidity: 43,
       location: 43,
     };
@@ -65,7 +65,7 @@ describe("Day x - Part 1", () => {
       fertiliser: 52,
       water: 41,
       light: 34,
-      temp: 34,
+      temperature: 34,
       humidity: 35,
       location: 35,
     };
@@ -75,7 +75,7 @@ describe("Day x - Part 1", () => {
       fertiliser: 57,
       water: 53,
       light: 46,
-      temp: 82,
+      temperature: 82,
       humidity: 82,
       location: 86,
     };
@@ -103,6 +103,6 @@ describe("Day x - Part 1", () => {
     const almanac = await part1({
       puzzleFilePath: "src/day5/puzzles/d5-puzzle.txt",
     });
-    expect(almanac.getLowestSeedLocation()).toEqual("-----------");
+    expect(almanac.getLowestSeedLocation()).toEqual(88151870);
   });
 });

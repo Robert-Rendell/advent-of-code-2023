@@ -1,22 +1,7 @@
 // almanac = seed map
 
 import { Almanac } from "../classes/Almanac";
-
-// Each line within a map contains three numbers: the destination range start, the source range start, and the range length.
-
-// seed-to-soil map:
-
-// soil-to-fertilizer map:
-
-// fertilizer-to-water map:
-
-// water-to-light map:
-
-// light-to-temperature map:
-
-// temperature-to-humidity map:
-
-// humidity-to-location map:
+import { AlmanacMap } from "../models/almanac-map";
 
 export function almanacParser(input: string): Almanac {
   const lines = input.split("\n");
@@ -24,12 +9,6 @@ export function almanacParser(input: string): Almanac {
     .replace("seeds: ", "")
     .split(" ")
     .map((seedStr) => parseInt(seedStr));
-
-  // seed-to-soil map:
-  // 50 98 2
-  // 52 50 48
-  //
-  // [soil seed range]
 
   return new Almanac({
     seeds,
@@ -43,19 +22,18 @@ export function almanacParser(input: string): Almanac {
   });
 }
 
-function parseMap(mapId: string, lines: string[]) {
-  console.log("Parsing map", mapId);
+function parseMap(mapId: string, lines: string[]): AlmanacMap {
   const rangesIndex = lines.findIndex((line) => line.includes(mapId));
   let nextLine = lines[rangesIndex + 1];
   let i = 0;
-  const map = {};
+  const map: AlmanacMap = {
+    ranges: [],
+  };
   while (nextLine && nextLine.trim() !== "") {
     let [destination, source, range] = nextLine
       .split(" ")
       .map((n) => parseInt(n));
-    for (let i = 0; i < range; i++) {
-      map[source + i] = destination + i;
-    }
+    map.ranges.push({ destination, source, range });
     i++;
     nextLine = lines[rangesIndex + 1 + i];
   }
