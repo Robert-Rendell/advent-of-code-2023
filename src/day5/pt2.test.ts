@@ -15,6 +15,10 @@ describe("Day 5 - Part 2", () => {
 
     // Answers
     // 1) 2008786 - Too high
-    expect(almanac.getLowestSeedLocation()).toEqual("------");
+    // 2) 2008785 - Correct (off by 1)
+    //            - haven't gotten to the bottom of why the puzzle
+    //              is different to example
+    // Calculation time (running in jest): 265158 ms
+    expect(almanac.getLowestSeedLocation()).toEqual(2008785);
   });
 });
