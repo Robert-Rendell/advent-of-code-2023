@@ -23,35 +23,35 @@ export async function part2(
     const scratchCard = originalScratchCards.find(
       (sc) => sc.cardNumber === n,
     );
-    return scratchCard?.calculateCardCopies({ max });
+    return scratchCard?.calculateCardCopies({ max }) ?? [];
   });
 
   const copies3 = copies2.flat().map((n) => {
     const scratchCard = originalScratchCards.find(
       (sc) => sc.cardNumber === n,
     );
-    return scratchCard?.calculateCardCopies({ max });
+    return scratchCard?.calculateCardCopies({ max }) ?? [];
   });
 
   const copies4 = copies3.flat().map((n) => {
     const scratchCard = originalScratchCards.find(
       (sc) => sc.cardNumber === n,
     );
-    return scratchCard?.calculateCardCopies({ max });
+    return scratchCard?.calculateCardCopies({ max }) ?? [];
   });
 
   const copies5 = copies4.flat().map((n) => {
     const scratchCard = originalScratchCards.find(
       (sc) => sc.cardNumber === n,
     );
-    return scratchCard?.calculateCardCopies({ max });
+    return scratchCard?.calculateCardCopies({ max }) ?? [];
   });
 
   const copies6 = copies5.flat().map((n) => {
     const scratchCard = originalScratchCards.find(
       (sc) => sc.cardNumber === n,
     );
-    return scratchCard?.calculateCardCopies({ max });
+    return scratchCard?.calculateCardCopies({ max }) ?? [];
   });
 
   console.log(originalScratchCards);
