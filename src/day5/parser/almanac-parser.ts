@@ -3,12 +3,16 @@
 import { Almanac } from "../classes/Almanac";
 import { AlmanacMap } from "../models/almanac-map";
 
-export function almanacParser(input: string): Almanac {
+export type AlmanacSeedFn = (seedLine: string) => number[];
+
+export function almanacParser(input: string, seedFn?: AlmanacSeedFn): Almanac {
   const lines = input.split("\n");
-  const seeds = lines[0]
-    .replace("seeds: ", "")
-    .split(" ")
-    .map((seedStr) => parseInt(seedStr));
+  const seeds = seedFn
+    ? seedFn(lines[0])
+    : lines[0]
+        .replace("seeds: ", "")
+        .split(" ")
+        .map((seedStr) => parseInt(seedStr));
 
   return new Almanac({
     seeds,
