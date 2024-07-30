@@ -13,10 +13,8 @@ describe("Day 5 - Part 2", () => {
       puzzleFilePath: "src/day5/puzzles/d5-puzzle.txt",
     });
 
-    // Fatal JavaScript invalid size error
-    // v8::internal::Runtime_GrowArrayElements
-    // Caused by the seed array trying to grow to fit more
-    // and it can't because it would be too big.
-    expect(almanac).toEqual("------");
+    // Answers
+    // 1) 2008786 - Too high
+    expect(almanac.getLowestSeedLocation()).toEqual("------");
   });
 });

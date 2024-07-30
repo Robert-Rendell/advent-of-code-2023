@@ -3,9 +3,7 @@
 import { Almanac } from "../classes/Almanac";
 import { AlmanacMap } from "../models/almanac-map";
 
-export type AlmanacSeedFn = (seedLine: string) => number[];
-
-export function almanacParser(input: string, seedFn?: AlmanacSeedFn): Almanac {
+export function almanacParser(input: string): Almanac {
   const lines = input.split("\n");
   const seeds = lines[0]
     .replace("seeds: ", "")

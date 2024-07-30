@@ -1,26 +1,24 @@
 import { AlmanacPt2 } from "../classes/AlmanacPt2";
+import { AlmanacSeedRange } from "../models/almanac-seed-range";
 import { parseMaps } from "./almanac-parser";
 
 export function almanacParserPt2(input: string): AlmanacPt2 {
   const lines = input.split("\n");
-  const seeds = seedParser(lines[0]);
 
   return new AlmanacPt2({
-    seeds,
+    seedRanges: seedParser(lines[0]),
     ...parseMaps(lines),
   });
 }
 
-function seedParser(seedLine: string): number[] {
-  const seedRanges = seedLine.replace("seeds: ", "").match(/\d+ \d+/g);
-  if (!seedRanges) return [];
+function seedParser(seedLine: string): AlmanacSeedRange[] {
+  const rawSeedRanges = seedLine.replace("seeds: ", "").match(/\d+ \d+/g);
+  if (!rawSeedRanges) return [];
 
-  const seeds: number[] = [];
-  for (const range of seedRanges) {
-    const [start, count] = range.split(" ").map((n) => parseInt(n));
-    for (let i = start; i < start + count; i++) {
-      seeds.push(i);
-    }
-  }
-  return seeds;
+  const seedRanges: AlmanacSeedRange[] = rawSeedRanges.map((sr) => {
+    const [start, count] = sr.split(" ").map((n) => parseInt(n));
+    return { start, count };
+  });
+  console.log(seedRanges.length);
+  return seedRanges;
 }
