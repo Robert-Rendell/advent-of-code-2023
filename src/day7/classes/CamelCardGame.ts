@@ -17,7 +17,7 @@ export class CamelCardGame {
   totalWinnings() {
     return this.sort()
       .map((hand, rank) => {
-        console.log(hand.hand, hand.bid, rank + 1);
+        // console.log(hand.hand, hand.bid, rank + 1);
         return hand.bid * (rank + 1);
       })
       .reduce((accumulator, currrentValue) => accumulator + currrentValue);

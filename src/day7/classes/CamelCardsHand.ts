@@ -67,7 +67,11 @@ export class CamelCardsHand {
         return -1;
       }
     }
-    console.error("Sorting failed - comparing two identical hands", h1.hand);
+    console.error(
+      "Sorting failed - comparing two identical hands",
+      h1.hand,
+      h2.hand,
+    );
     return 0;
   }
 

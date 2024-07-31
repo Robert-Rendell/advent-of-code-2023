@@ -78,11 +78,14 @@ describe("Day 7 - Part 1", () => {
   });
 
   it("should answer the puzzle correctly", async () => {
-    const actual = await part1({
+    const camelCardsGame = await part1({
       puzzleFilePath: "src/day7/puzzles/d7-puzzle.txt",
     });
 
-    // Find the rank of every hand in your set. What are the total winnings?
-    expect(actual).toEqual("------");
+    // Answers
+    // 1) 251201528 - too low
+    expect(camelCardsGame.totalWinnings()).not.toEqual(251201528);
+
+    expect(camelCardsGame.totalWinnings()).toEqual("-----");
   });
 });
