@@ -1,5 +1,6 @@
 import { getEntries } from "../../types/entries";
 import { ExcludeMethods } from "../../types/exclude-methods";
+import { frequencyTable } from "../../utils/frequencies";
 
 export class CamelCardsHand {
   hand: string;
@@ -9,87 +10,116 @@ export class CamelCardsHand {
     this.hand = initialValues.hand;
   }
 
-  calculateRank(): number {
-    return -1;
+  handType() {
+    for (const [handTypeName, isHandType] of getEntries(
+      CamelCardsHand.handTypeCalculations,
+    )) {
+      if (isHandType(this.hand)) {
+        return handTypeName;
+      }
+    }
+    throw new Error("Fatal Error: Every hand is exactly one type");
   }
 
-  calculateHandType() {
-    let handType: CamelCardsHandType | undefined;
-    getEntries(handTypeCalculations).forEach(([handTypeName, isHandType]) => {
-      if (isHandType(this.hand)) {
-        handType = handTypeName;
-      }
-    });
-    return handType;
+  /**
+   * Higher the array index, higher the strength
+   */
+  static camelCardStrength = [2, 3, 4, 5, 6, 7, 8, 9, "T", "J", "Q", "K", "A"];
+
+  static camelCardHandTypeStrength = [
+    "High card",
+    "One pair",
+    "Two pair",
+    "Three of a kind",
+    "Full house",
+    "Four of a kind",
+    "Five of a kind",
+  ] as const;
+
+  static handStrength(hand: CamelCardsHand) {
+    return CamelCardsHand.camelCardHandTypeStrength.indexOf(hand.handType());
   }
+
+  static cardStrength(card: string) {
+    return CamelCardsHand.camelCardStrength.indexOf(card);
+  }
+
+  static sortFn(h1: CamelCardsHand, h2: CamelCardsHand) {
+    // primary sort - based on hand strength
+    const handStrength1 = CamelCardsHand.handStrength(h1);
+    const handStrength2 = CamelCardsHand.handStrength(h2);
+    if (handStrength1 > handStrength2) {
+      return 1;
+    }
+
+    if (handStrength1 < handStrength2) {
+      return -1;
+    }
+
+    // secondary sort - based on card strength left to right
+    for (let i = 0; i < h1.hand.length; i++) {
+      const cardStrength1 = CamelCardsHand.cardStrength(h1.hand[i]);
+      const cardStrength2 = CamelCardsHand.cardStrength(h2.hand[i]);
+      if (cardStrength1 > cardStrength2) {
+        return 1;
+      }
+      if (cardStrength1 > cardStrength2) {
+        return -1;
+      }
+    }
+    console.error("Sorting failed - comparing two identical hands", h1.hand);
+    return 0;
+  }
+
+  static handTypeCalculations: Record<
+    CamelCardsHandType,
+    (hand: string) => boolean
+  > = {
+    "Five of a kind": function (hand: string): boolean {
+      const f = frequencyTable(hand);
+      return Object.keys(f).length === 1;
+    },
+    "Four of a kind": function (hand: string): boolean {
+      const f = frequencyTable(hand);
+      return (
+        Object.keys(f).length === 2 &&
+        Boolean(Object.values(f).find((n) => n === 4))
+      );
+    },
+    "Full house": function (hand: string): boolean {
+      const f = frequencyTable(hand);
+      return (
+        Object.keys(f).length === 2 &&
+        Boolean(Object.values(f).find((n) => n === 3))
+      );
+    },
+    "Three of a kind": function (hand: string): boolean {
+      const f = frequencyTable(hand);
+      return (
+        Object.keys(f).length === 3 &&
+        Boolean(Object.values(f).find((n) => n === 3))
+      );
+    },
+    "Two pair": function (hand: string): boolean {
+      const f = frequencyTable(hand);
+      return (
+        Object.keys(f).length === 3 &&
+        Boolean(Object.values(f).find((n) => n === 2))
+      );
+    },
+    "One pair": function (hand: string): boolean {
+      const f = frequencyTable(hand);
+      return (
+        Object.keys(f).length === 4 &&
+        Boolean(Object.values(f).find((n) => n === 2))
+      );
+    },
+    "High card": function (hand: string): boolean {
+      const f = frequencyTable(hand);
+      return Object.keys(f).length === 5;
+    },
+  };
 }
 
 export type CamelCardsHandType =
-  | "Five of a kind"
-  | "Four of a kind"
-  | "Full house"
-  | "Three of a kind"
-  | "Two pair"
-  | "One pair"
-  | "High card";
-
-const handTypeCalculations: Record<
-  CamelCardsHandType,
-  (hand: string) => boolean
-> = {
-  "Five of a kind": function (hand: string): boolean {
-    const f = getCardFrequencies(hand);
-    return Object.keys(f).length === 1;
-  },
-  "Four of a kind": function (hand: string): boolean {
-    const f = getCardFrequencies(hand);
-    return (
-      Object.keys(f).length === 2 &&
-      Boolean(Object.values(f).find((n) => n === 4))
-    );
-  },
-  "Full house": function (hand: string): boolean {
-    const f = getCardFrequencies(hand);
-    return (
-      Object.keys(f).length === 2 &&
-      Boolean(Object.values(f).find((n) => n === 3))
-    );
-  },
-  "Three of a kind": function (hand: string): boolean {
-    const f = getCardFrequencies(hand);
-    return (
-      Object.keys(f).length === 3 &&
-      Boolean(Object.values(f).find((n) => n === 3))
-    );
-  },
-  "Two pair": function (hand: string): boolean {
-    const f = getCardFrequencies(hand);
-    return (
-      Object.keys(f).length === 3 &&
-      Boolean(Object.values(f).find((n) => n === 2))
-    );
-  },
-  "One pair": function (hand: string): boolean {
-    const f = getCardFrequencies(hand);
-    return (
-      Object.keys(f).length === 4 &&
-      Boolean(Object.values(f).find((n) => n === 2))
-    );
-  },
-  "High card": function (hand: string): boolean {
-    const f = getCardFrequencies(hand);
-    return Object.keys(f).length === 5;
-  },
-};
-
-function getCardFrequencies(hand: string): Record<string, number> {
-  const f = {};
-  for (const card of hand) {
-    if (typeof f[card] === "undefined") {
-      f[card] = 1;
-    } else {
-      f[card] += 1;
-    }
-  }
-  return f;
-}
+  (typeof CamelCardsHand.camelCardHandTypeStrength)[number];
