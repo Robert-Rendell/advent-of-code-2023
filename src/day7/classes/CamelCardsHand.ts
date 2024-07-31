@@ -63,7 +63,7 @@ export class CamelCardsHand {
       if (cardStrength1 > cardStrength2) {
         return 1;
       }
-      if (cardStrength1 > cardStrength2) {
+      if (cardStrength1 < cardStrength2) {
         return -1;
       }
     }
