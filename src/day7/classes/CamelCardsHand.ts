@@ -24,7 +24,7 @@ export class CamelCardsHand {
   /**
    * Higher the array index, higher the strength
    */
-  static camelCardStrength = [2, 3, 4, 5, 6, 7, 8, 9, "T", "J", "Q", "K", "A"];
+  static camelCardStrength = ["T", "J", "Q", "K", "A"];
 
   static camelCardHandTypeStrength = [
     "High card",
@@ -41,7 +41,8 @@ export class CamelCardsHand {
   }
 
   static cardStrength(card: string) {
-    return CamelCardsHand.camelCardStrength.indexOf(card);
+    const index = CamelCardsHand.camelCardStrength.indexOf(card);
+    return index === -1 ? card : index;
   }
 
   static sortFn(h1: CamelCardsHand, h2: CamelCardsHand) {
@@ -60,6 +61,7 @@ export class CamelCardsHand {
     for (let i = 0; i < h1.hand.length; i++) {
       const cardStrength1 = CamelCardsHand.cardStrength(h1.hand[i]);
       const cardStrength2 = CamelCardsHand.cardStrength(h2.hand[i]);
+
       if (cardStrength1 > cardStrength2) {
         return 1;
       }
@@ -67,12 +69,9 @@ export class CamelCardsHand {
         return -1;
       }
     }
-    console.error(
-      "Sorting failed - comparing two identical hands",
-      h1.hand,
-      h2.hand,
-    );
-    return 0;
+
+    console.error(h1.hand, h2.hand);
+    throw new Error("Sorting failed");
   }
 
   static handTypeCalculations: Record<

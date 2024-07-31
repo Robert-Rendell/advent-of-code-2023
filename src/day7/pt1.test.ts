@@ -59,15 +59,24 @@ describe("Day 7 - Part 1", () => {
     });
   });
 
-  it("should rank the hands", async () => {
-    const camelCardsGame = await part1({
-      puzzleFilePath: "src/day7/puzzles/d7-example.txt",
+  describe("sorting hands", () => {
+    // it("should rank the hands", async () => {
+    //   // strongest rank is the last
+    //   const expectedRanks = ["32T3K", "KTJJT", "KK677", "T55J5", "QQQJA"];
+    //   expect(camelCardsGame.sort().map((hand) => hand.hand)).toEqual(
+    //     expectedRanks,
+    //   );
+    // });
+    it("should rank the hands", async () => {
+      const camelCardsGame = await part1({
+        puzzleFilePath: "src/day7/puzzles/d7-example.txt",
+      });
+      // strongest rank is the last
+      const expectedRanks = ["32T3K", "KTJJT", "KK677", "T55J5", "QQQJA"];
+      expect(camelCardsGame.sort().map((hand) => hand.hand)).toEqual(
+        expectedRanks,
+      );
     });
-    // strongest rank is the last
-    const expectedRanks = ["32T3K", "KTJJT", "KK677", "T55J5", "QQQJA"];
-    expect(camelCardsGame.sort().map((hand) => hand.hand)).toEqual(
-      expectedRanks,
-    );
   });
 
   it("should answer the example correctly", async () => {
