@@ -1,61 +1,60 @@
-
 import { CamelCardsHand, CamelCardsHandType } from "./classes/CamelCardsHand";
 import { part1 } from "./pt1";
 
 describe("Day 7 - Part 1", () => {
   it("should calculate hand type: one pair", () => {
-    const hand = new CamelCardsHand({ hand: "32T3K", bid: 0 })
+    const hand = new CamelCardsHand({ hand: "32T3K", bid: 0 });
     const handType = hand.calculateHandType();
     const expectedHandType: CamelCardsHandType = "One pair";
-    expect(handType).toEqual(expectedHandType)
+    expect(handType).toEqual(expectedHandType);
   });
   it("should calculate hand type: two pair", () => {
-    const hand = new CamelCardsHand({ hand: "KK677", bid: 0 })
+    const hand = new CamelCardsHand({ hand: "KK677", bid: 0 });
     const handType = hand.calculateHandType();
     const expectedHandType: CamelCardsHandType = "Two pair";
-    expect(handType).toEqual(expectedHandType)
+    expect(handType).toEqual(expectedHandType);
   });
   it("should calculate hand type: two pair #2", () => {
-    const hand = new CamelCardsHand({ hand: "KTJJT", bid: 0 })
+    const hand = new CamelCardsHand({ hand: "KTJJT", bid: 0 });
     const handType = hand.calculateHandType();
     const expectedHandType: CamelCardsHandType = "Two pair";
-    expect(handType).toEqual(expectedHandType)
+    expect(handType).toEqual(expectedHandType);
   });
   it("should calculate hand type: three of a kind", () => {
-    const hand = new CamelCardsHand({ hand: "T55J5", bid: 0 })
+    const hand = new CamelCardsHand({ hand: "T55J5", bid: 0 });
     const handType = hand.calculateHandType();
     const expectedHandType: CamelCardsHandType = "Three of a kind";
-    expect(handType).toEqual(expectedHandType)
+    expect(handType).toEqual(expectedHandType);
   });
   it("should calculate hand type: three of a kind #2", () => {
-    const hand = new CamelCardsHand({ hand: "QQQJA", bid: 0 })
+    const hand = new CamelCardsHand({ hand: "QQQJA", bid: 0 });
     const handType = hand.calculateHandType();
     const expectedHandType: CamelCardsHandType = "Three of a kind";
-    expect(handType).toEqual(expectedHandType)
+    expect(handType).toEqual(expectedHandType);
   });
   it("should calculate hand type: five of a kind", () => {
-    const hand = new CamelCardsHand({ hand: "AAAAA", bid: 0 })
+    const hand = new CamelCardsHand({ hand: "AAAAA", bid: 0 });
     const handType = hand.calculateHandType();
     const expectedHandType: CamelCardsHandType = "Five of a kind";
-    expect(handType).toEqual(expectedHandType)
+    expect(handType).toEqual(expectedHandType);
   });
   it("should calculate hand type: four of a kind", () => {
-    const hand = new CamelCardsHand({ hand: "AA8AA", bid: 0 })
+    const hand = new CamelCardsHand({ hand: "AA8AA", bid: 0 });
     const handType = hand.calculateHandType();
     const expectedHandType: CamelCardsHandType = "Four of a kind";
-    expect(handType).toEqual(expectedHandType)
+    expect(handType).toEqual(expectedHandType);
   });
   it("should calculate hand type: Full house", () => {
-    const hand = new CamelCardsHand({ hand: "23332", bid: 0 })
+    const hand = new CamelCardsHand({ hand: "23332", bid: 0 });
     const handType = hand.calculateHandType();
     const expectedHandType: CamelCardsHandType = "Full house";
-    expect(handType).toEqual(expectedHandType)
+    expect(handType).toEqual(expectedHandType);
   });
   it("should calculate hand type: High card", () => {
-    const hand = new CamelCardsHand({ hand: "12345", bid: 0 })
+    const hand = new CamelCardsHand({ hand: "12345", bid: 0 });
     const handType = hand.calculateHandType();
     const expectedHandType: CamelCardsHandType = "High card";
-    expect(handType).toEqual(expectedHandType)
+    expect(handType).toEqual(expectedHandType);
   });
   it("should answer the example correctly", async () => {
     const actual = await part1({
