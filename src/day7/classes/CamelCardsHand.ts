@@ -24,7 +24,21 @@ export class CamelCardsHand {
   /**
    * Higher the array index, higher the strength
    */
-  static camelCardStrength = ["T", "J", "Q", "K", "A"];
+  static camelCardStrength = [
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "T",
+    "J",
+    "Q",
+    "K",
+    "A",
+  ];
 
   static camelCardHandTypeStrength = [
     "High card",
@@ -42,7 +56,10 @@ export class CamelCardsHand {
 
   static cardStrength(card: string) {
     const index = CamelCardsHand.camelCardStrength.indexOf(card);
-    return index === -1 ? card : index;
+    if (index === -1) {
+      throw Error(`cardStrength mapping failed ${card}`);
+    }
+    return index;
   }
 
   static sortFn(h1: CamelCardsHand, h2: CamelCardsHand) {
@@ -58,10 +75,15 @@ export class CamelCardsHand {
     }
 
     // secondary sort - based on card strength left to right
+    const logs: string[] = [];
     for (let i = 0; i < h1.hand.length; i++) {
       const cardStrength1 = CamelCardsHand.cardStrength(h1.hand[i]);
       const cardStrength2 = CamelCardsHand.cardStrength(h2.hand[i]);
-
+      logs.push(
+        `${cardStrength1} > ${cardStrength2} = ${
+          cardStrength1 > cardStrength2
+        }`,
+      );
       if (cardStrength1 > cardStrength2) {
         return 1;
       }
@@ -70,7 +92,7 @@ export class CamelCardsHand {
       }
     }
 
-    console.error(h1.hand, h2.hand);
+    console.error(h1.hand, h2.hand, logs);
     throw new Error("Sorting failed");
   }
 

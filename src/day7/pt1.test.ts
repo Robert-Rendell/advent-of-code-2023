@@ -94,7 +94,7 @@ describe("Day 7 - Part 1", () => {
     // Answers
     // 1) 251201528 - too low
     expect(camelCardsGame.totalWinnings()).not.toEqual(251201528);
-
-    expect(camelCardsGame.totalWinnings()).toEqual("-----");
+    // 2) 251216224
+    expect(camelCardsGame.totalWinnings()).toEqual(251216224);
   });
 });
