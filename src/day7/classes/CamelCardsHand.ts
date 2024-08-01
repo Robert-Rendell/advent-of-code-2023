@@ -1,6 +1,7 @@
 import { getEntries } from "../../types/entries";
 import { ExcludeMethods } from "../../types/exclude-methods";
 import { frequencyTable } from "../../utils/frequencies";
+import { CamelCardGame } from "./CamelCardGame";
 
 export class CamelCardsHand {
   hand: string;
@@ -10,62 +11,48 @@ export class CamelCardsHand {
     this.hand = initialValues.hand;
   }
 
-  handType() {
+  jokerHand() {
+    if (!this.hand.includes("J")) return this.hand;
+
+    const frequencies = frequencyTable(this.hand);
+    let maxCard: [string, number] = [CamelCardGame.camelCardStrength[0], 0];
+    getEntries(frequencies).forEach(([card, frequency]) => {
+      const [currentMostFrequentCard, currentMostFrequentCardFrequency] =
+        maxCard;
+      if (frequency > currentMostFrequentCardFrequency) {
+        maxCard = [card, frequency];
+      }
+      if (frequency === currentMostFrequentCardFrequency) {
+        const currentCard = CamelCardGame.cardStrength(currentMostFrequentCard);
+        const contenderCard = CamelCardGame.cardStrength(card);
+        if (contenderCard > currentCard) {
+          maxCard = [card, frequency];
+        }
+      }
+    });
+    const [card] = maxCard;
+    return this.hand.replace(/J/g, card);
+  }
+
+  jokerHandType(): CamelCardsHandType {
+    return this.handType(this.jokerHand());
+  }
+
+  handType(hand?: string): CamelCardsHandType {
     for (const [handTypeName, isHandType] of getEntries(
       CamelCardsHand.handTypeCalculations,
     )) {
-      if (isHandType(this.hand)) {
+      if (isHandType(hand ?? this.hand)) {
         return handTypeName;
       }
     }
     throw new Error("Fatal Error: Every hand is exactly one type");
   }
 
-  /**
-   * Higher the array index, higher the strength
-   */
-  static camelCardStrength = [
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "T",
-    "J",
-    "Q",
-    "K",
-    "A",
-  ];
-
-  static camelCardHandTypeStrength = [
-    "High card",
-    "One pair",
-    "Two pair",
-    "Three of a kind",
-    "Full house",
-    "Four of a kind",
-    "Five of a kind",
-  ] as const;
-
-  static handStrength(hand: CamelCardsHand) {
-    return CamelCardsHand.camelCardHandTypeStrength.indexOf(hand.handType());
-  }
-
-  static cardStrength(card: string) {
-    const index = CamelCardsHand.camelCardStrength.indexOf(card);
-    if (index === -1) {
-      throw Error(`cardStrength mapping failed ${card}`);
-    }
-    return index;
-  }
-
   static sortFn(h1: CamelCardsHand, h2: CamelCardsHand) {
     // primary sort - based on hand strength
-    const handStrength1 = CamelCardsHand.handStrength(h1);
-    const handStrength2 = CamelCardsHand.handStrength(h2);
+    const handStrength1 = CamelCardGame.handStrength(h1);
+    const handStrength2 = CamelCardGame.handStrength(h2);
     if (handStrength1 > handStrength2) {
       return 1;
     }
@@ -77,8 +64,8 @@ export class CamelCardsHand {
     // secondary sort - based on card strength left to right
     const logs: string[] = [];
     for (let i = 0; i < h1.hand.length; i++) {
-      const cardStrength1 = CamelCardsHand.cardStrength(h1.hand[i]);
-      const cardStrength2 = CamelCardsHand.cardStrength(h2.hand[i]);
+      const cardStrength1 = CamelCardGame.cardStrength(h1.hand[i]);
+      const cardStrength2 = CamelCardGame.cardStrength(h2.hand[i]);
       logs.push(
         `${cardStrength1} > ${cardStrength2} = ${
           cardStrength1 > cardStrength2
@@ -147,4 +134,4 @@ export class CamelCardsHand {
 }
 
 export type CamelCardsHandType =
-  (typeof CamelCardsHand.camelCardHandTypeStrength)[number];
+  (typeof CamelCardGame.camelCardHandTypeStrength)[number];

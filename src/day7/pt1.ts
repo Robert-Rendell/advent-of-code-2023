@@ -1,6 +1,5 @@
 import { readFile } from "../utils/read-file";
 import { CamelCardGame } from "./classes/CamelCardGame";
-import { CamelCardsHand } from "./classes/CamelCardsHand";
 import { camelCardsParser } from "./parser/camel-cards-parser";
 
 export async function part1(

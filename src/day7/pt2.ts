@@ -1,4 +1,6 @@
 import { readFile } from "../utils/read-file";
+import { CamelCardGame } from "./classes/CamelCardGame";
+import { camelCardsParser } from "./parser/camel-cards-parser";
 
 export async function part2(
   opts: { input: string } | { puzzleFilePath: string },
@@ -9,4 +11,8 @@ export async function part2(
   } else {
     input = opts.input;
   }
+
+  const hands = camelCardsParser(input);
+  CamelCardGame.switchToJokerGameMode();
+  return new CamelCardGame({ hands });
 }
