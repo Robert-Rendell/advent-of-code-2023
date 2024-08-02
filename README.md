@@ -20,7 +20,7 @@ Install project dependencies:
 npm install
 ```
 
-## Puzzle solutions are run within jest unit tests
+### Puzzle solutions are run within jest unit tests
 
 To run all puzzle solutions:
 ```
