@@ -19,7 +19,7 @@ export class CamelCardsHand {
     getEntries(frequencies).forEach(([card, frequency]) => {
       const [currentMostFrequentCard, currentMostFrequentCardFrequency] =
         maxCard;
-      if (frequency > currentMostFrequentCardFrequency) {
+      if (frequency > currentMostFrequentCardFrequency && card !== "J") {
         maxCard = [card, frequency];
       }
       if (frequency === currentMostFrequentCardFrequency) {
