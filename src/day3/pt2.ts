@@ -1,4 +1,4 @@
-import { readFile } from "../utils/read-file";
+import { readFile } from "../utils/read-file/read-file";
 import { EngineSchematic } from "./EngineSchematic";
 
 export async function part2(

@@ -1,4 +1,4 @@
-import { readFile } from "../utils/read-file";
+import { readFile } from "../utils/read-file/read-file";
 import { sumAllCalibrationValues } from "./pt1";
 
 const numberWordMapping = [

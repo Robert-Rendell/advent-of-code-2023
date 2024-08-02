@@ -1,4 +1,4 @@
-import { readFile } from "../utils/read-file";
+import { readFile } from "../utils/read-file/read-file";
 import { ColourCounts, Game, gamesParser } from "./pt1";
 
 export async function part2(

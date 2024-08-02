@@ -1,4 +1,4 @@
-import { readFile } from "../utils/read-file";
+import { readFile } from "../utils/read-file/read-file";
 
 export async function part2(
   opts: { input: string } | { puzzleFilePath: string },

@@ -1,4 +1,4 @@
-import { readFile } from "../utils/read-file";
+import { readFile } from "../utils/read-file/read-file";
 import { almanacParserPt2 } from "./parser/almanac-parser-pt2";
 
 export async function part2(

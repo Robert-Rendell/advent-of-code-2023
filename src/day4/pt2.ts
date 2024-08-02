@@ -1,4 +1,4 @@
-import { readFile } from "../utils/read-file";
+import { readFile } from "../utils/read-file/read-file";
 import { scratchCardParser } from "./parser/scratch-card-parser";
 
 export async function part2(
