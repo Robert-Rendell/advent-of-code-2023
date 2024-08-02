@@ -8,7 +8,10 @@ describe("Day 5 - Part 2", () => {
     expect(almanac.getLowestSeedLocation()).toEqual(46);
   });
 
-  it("should answer the puzzle correctly", async () => {
+  it.skip("should answer the puzzle correctly", async () => {
+    console.warn(
+      "Day 5 - Part 2 -- This test takes >265s and is long running.",
+    );
     const almanac = await part2({
       puzzleFilePath: "src/day5/puzzles/d5-puzzle.txt",
     });

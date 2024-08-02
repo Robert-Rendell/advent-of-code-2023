@@ -7,7 +7,7 @@ export type CamelMap = [Instructions, Nodes];
 
 export function mapParser(input: string): CamelMap {
   const lines = input.split("\n");
-  const nodes = {};
+  const nodes: Nodes = {};
 
   const instructions = lines[0];
 
@@ -17,7 +17,7 @@ export function mapParser(input: string): CamelMap {
     nodes[nodeName] = nodeInstructions
       .replace("(", "")
       .replace(")", "")
-      .split(", ");
+      .split(", ") as any;
   }
   return [instructions, nodes];
 }

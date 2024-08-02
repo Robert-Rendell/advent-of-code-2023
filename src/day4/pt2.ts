@@ -17,12 +17,12 @@ export async function part2(
     return card.calculateCardCopies({ max });
   });
 
-  console.log(originalScratchCards.map((sc) => sc.cardNumber));
+  // console.log(originalScratchCards.map((sc) => sc.cardNumber));
 
   const allCardCopies = [...copies1.flat()];
   let previouslyCalculatedCopies = copies1;
   for (let x = 1; x < max - 1; x++) {
-    console.log(x);
+    // console.log(x);
     const copies = previouslyCalculatedCopies.flat().map((n) => {
       const scratchCard = originalScratchCards.find(
         (sc) => sc.cardNumber === n,
@@ -35,8 +35,8 @@ export async function part2(
     previouslyCalculatedCopies = copies;
   }
 
-  console.log("All Copies: " + allCardCopies.length);
-  console.log("All Originals: " + originalScratchCards.length);
+  // console.log("All Copies: " + allCardCopies.length);
+  // console.log("All Originals: " + originalScratchCards.length);
 
   // "how many total scratchcards do you end up with?" -->
   return [

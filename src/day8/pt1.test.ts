@@ -23,13 +23,20 @@ ZZZ = (ZZZ, ZZZ)`;
     const actual = await part1({
       puzzleFilePath: "src/day8/puzzles/d8-example.txt",
     });
-    expect(actual).toEqual("------");
+    expect(actual).toEqual(2);
   });
 
-  it("should answer the puzzle correctly", async () => {
+  it("should answer the second example correctly", async () => {
     const actual = await part1({
-      puzzleFilePath: "src/day8/puzzles/d8-puzzle.txt",
+      puzzleFilePath: "src/day8/puzzles/d8-example2.txt",
     });
-    expect(actual).toEqual("------");
+    expect(actual).toEqual(6);
   });
+
+  // it("should answer the puzzle correctly", async () => {
+  //   const actual = await part1({
+  //     puzzleFilePath: "src/day8/puzzles/d8-puzzle.txt",
+  //   });
+  //   expect(actual).toEqual("------");
+  // });
 });

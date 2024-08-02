@@ -22,7 +22,7 @@
   },
   "jest": {
     "testPathIgnorePatterns": [
-      "./src/template"
+      "./src/solution-template"
     ]
   }
 }
