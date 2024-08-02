@@ -1,6 +1,6 @@
 import { getEntries } from "../../types/entries";
 import { ExcludeMethods } from "../../types/exclude-methods";
-import { countCharacters } from "../../utils/count-characters";
+import { countCharacters } from "../../utils/count-characters/count-characters";
 import { CamelCardGame } from "./CamelCardGame";
 
 export class CamelCardsHand {

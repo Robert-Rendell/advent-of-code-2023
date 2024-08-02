@@ -1,4 +1,4 @@
-import { readFile } from "../utils/read-file";
+import { readFile } from "../utils/read-file/read-file";
 import { CamelCardGame } from "./classes/CamelCardGame";
 import { camelCardsParser } from "./parser/camel-cards-parser";
 
