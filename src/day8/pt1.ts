@@ -15,21 +15,11 @@ export async function part1(
   const LR: Record<string, number> = { L: 0, R: 1 };
 
   let steps = 0;
-  let node = Object.keys(nodes)[0]; // sorted by insertion index
+  let node = "AAA";
   const isFinished = (): boolean => node === "ZZZ";
 
   while (!isFinished()) {
     for (let i = 0; i < instructions.length; i++) {
-      if (nodes[node].includes("ZZZ")) {
-        // console.log(
-        //   steps,
-        //   instructions[i],
-        //   ":::",
-        //   node,
-        //   "has ZZZ",
-        //   nodes[node],
-        // );
-      }
       node = nodes[node][LR[instructions[i]]];
       steps++;
       if (isFinished()) {

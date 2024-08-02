@@ -33,10 +33,10 @@ ZZZ = (ZZZ, ZZZ)`;
     expect(actual).toEqual(6);
   });
 
-  // it("should answer the puzzle correctly", async () => {
-  //   const actual = await part1({
-  //     puzzleFilePath: "src/day8/puzzles/d8-puzzle.txt",
-  //   });
-  //   expect(actual).toEqual("------");
-  // });
+  it("should answer the puzzle correctly", async () => {
+    const actual = await part1({
+      puzzleFilePath: "src/day8/puzzles/d8-puzzle.txt",
+    });
+    expect(actual).toEqual(19631);
+  });
 });
