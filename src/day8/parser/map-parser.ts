@@ -12,7 +12,7 @@ export function mapParser(input: string): CamelMap {
   const instructions = lines[0];
 
   // AAA = (BBB, CCC)
-  for (let i = 1; i < lines.length; i++) {
+  for (let i = 2; i < lines.length; i++) {
     const [nodeName, nodeInstructions] = lines[i].split(" = ");
     nodes[nodeName] = nodeInstructions
       .replace("(", "")
