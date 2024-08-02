@@ -1,6 +1,6 @@
 import { getEntries } from "../../types/entries";
 import { ExcludeMethods } from "../../types/exclude-methods";
-import { frequencyTable } from "../../utils/frequencies";
+import { countCharacters } from "../../utils/count-characters";
 import { CamelCardGame } from "./CamelCardGame";
 
 export class CamelCardsHand {
@@ -14,7 +14,7 @@ export class CamelCardsHand {
   jokerHand() {
     if (!this.hand.includes("J")) return this.hand;
 
-    const frequencies = frequencyTable(this.hand);
+    const frequencies = countCharacters(this.hand);
     let maxCard: [string, number] = [CamelCardGame.camelCardStrength[0], 0];
     getEntries(frequencies).forEach(([card, frequency]) => {
       const [currentMostFrequentCard, currentMostFrequentCardFrequency] =
@@ -88,46 +88,46 @@ export class CamelCardsHand {
     (hand: string) => boolean
   > = {
     "Five of a kind": function (hand: string): boolean {
-      const f = frequencyTable(hand);
+      const f = countCharacters(hand);
       return Object.keys(f).length === 1;
     },
     "Four of a kind": function (hand: string): boolean {
-      const f = frequencyTable(hand);
+      const f = countCharacters(hand);
       return (
         Object.keys(f).length === 2 &&
         Boolean(Object.values(f).find((n) => n === 4))
       );
     },
     "Full house": function (hand: string): boolean {
-      const f = frequencyTable(hand);
+      const f = countCharacters(hand);
       return (
         Object.keys(f).length === 2 &&
         Boolean(Object.values(f).find((n) => n === 3))
       );
     },
     "Three of a kind": function (hand: string): boolean {
-      const f = frequencyTable(hand);
+      const f = countCharacters(hand);
       return (
         Object.keys(f).length === 3 &&
         Boolean(Object.values(f).find((n) => n === 3))
       );
     },
     "Two pair": function (hand: string): boolean {
-      const f = frequencyTable(hand);
+      const f = countCharacters(hand);
       return (
         Object.keys(f).length === 3 &&
         Boolean(Object.values(f).find((n) => n === 2))
       );
     },
     "One pair": function (hand: string): boolean {
-      const f = frequencyTable(hand);
+      const f = countCharacters(hand);
       return (
         Object.keys(f).length === 4 &&
         Boolean(Object.values(f).find((n) => n === 2))
       );
     },
     "High card": function (hand: string): boolean {
-      const f = frequencyTable(hand);
+      const f = countCharacters(hand);
       return Object.keys(f).length === 5;
     },
   };

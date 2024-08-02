@@ -1,4 +1,4 @@
-export function frequencyTable(input: string): Record<string, number> {
+export function countCharacters(input: string): Record<string, number> {
   const f = {};
   for (const character of input) {
     if (typeof f[character] === "undefined") {
